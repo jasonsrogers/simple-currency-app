@@ -10,7 +10,7 @@ import reducer from "./reducers/reducer";
 
 import getInitialState from "./service/initial-state";
 
-const store = createStore(reducer, getInitialState());
+const store = createStore(reducer, { ...getInitialState() });
 
 ReactDOM.render(
   <Provider store={store}>
