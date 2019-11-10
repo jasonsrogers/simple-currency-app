@@ -11,7 +11,7 @@ function ConversionForm(props) {
     selectedToPocketCurrency
   } = props;
   const fromPocket = pockets[selectedFromPocketCurrency];
-  const toPocket = pockets[selectedToPocketCurrency];
+  const toPocket = pockets[selectedToPocketCurrency] || {};
 
   const { selectedRateInfo = {} } = selectedPocketRates;
   const { rates } = selectedRateInfo;
