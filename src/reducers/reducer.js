@@ -1,7 +1,28 @@
 import getInitialState from "service/initial-state";
-import { REQUEST_RATES, RECEIVE_RATES, TRANSFER_FUNDS } from "actions/actions";
+import {
+  REQUEST_RATES,
+  RECEIVE_RATES,
+  TRANSFER_FUNDS,
+  SELECT_FROM_POCKET,
+  SELECT_TO_POCKET
+} from "actions/actions";
 export default (state = { ...getInitialState() }, action) => {
   switch (action.type) {
+    case SELECT_FROM_POCKET:
+      return {
+        ...state,
+        selectedFromPocketCurrency: action.code,
+        selectedToPocketCurrency:
+          action.code === state.selectedToPocketCurrency
+            ? ""
+            : state.selectedToPocketCurrency
+      };
+    case SELECT_TO_POCKET:
+      return {
+        ...state,
+        selectedToPocketCurrency: action.code
+      };
+
     case REQUEST_RATES:
       return {
         ...state,
@@ -28,7 +49,6 @@ export default (state = { ...getInitialState() }, action) => {
       const { fromPocketCode, fromValue, toPocketCode, toValue } = action;
 
       let pockets = { ...state.pockets };
-      debugger;
       let fromPocket = { ...pockets[fromPocketCode] };
       fromPocket.amount -= fromValue;
       let toPocket = { ...pockets[toPocketCode] };

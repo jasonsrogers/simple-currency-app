@@ -1,7 +1,30 @@
 import { getRates } from "service/ratesService";
 
-export const REQUEST_RATES = "REQUEST_RATES";
+export const SELECT_TO_POCKET = "SELECT_TO_POCKET";
+export function selectToPocket(code) {
+  return {
+    type: SELECT_TO_POCKET,
+    code
+  };
+}
 
+export const SELECT_FROM_POCKET = "SELECT_FROM_POCKET";
+export function changeFromPocket(code) {
+  return {
+    type: SELECT_FROM_POCKET,
+    code
+  };
+}
+export function selectFromPocket(code) {
+  return dispatch => {
+    dispatch(changeFromPocket(code));
+    dispatch(fetchRates(code));
+  };
+}
+
+//selectedFromPocketCurrency
+
+export const REQUEST_RATES = "REQUEST_RATES";
 function requestRates(currency) {
   return {
     type: REQUEST_RATES,

@@ -4,14 +4,18 @@ import { useInput } from "hooks/input-hook";
 function ConversionForm(props) {
   const {
     selectedPocketRates,
-    toPocket = {},
-    fromPocket = {},
-    onTransferFunds
+    onTransferFunds,
+    onSelectToPocket,
+    pockets,
+    selectedFromPocketCurrency,
+    selectedToPocketCurrency
   } = props;
+  const fromPocket = pockets[selectedFromPocketCurrency];
+  const toPocket = pockets[selectedToPocketCurrency];
 
   const { selectedRateInfo = {} } = selectedPocketRates;
   const { rates } = selectedRateInfo;
-  const rate = getCurrencyExchangeRate(rates, toPocket.code);
+  let rate;
 
   function roundNumber(value) {
     // not sure if truncating or rounding it better
@@ -76,19 +80,38 @@ function ConversionForm(props) {
     resetToValue();
   };
 
-  if (rate) {
+  if (rates) {
+    rate = getCurrencyExchangeRate(rates, toPocket.code);
+
+    const listUnSelectedPockets = Object.entries(pockets).filter(
+      ([key, value]) => {
+        return !(
+          key === selectedFromPocketCurrency || key === selectedToPocketCurrency
+        );
+      }
+    );
+
     return (
       <form onSubmit={handleSubmit}>
         <label>
-          From Value:
+          From Value {fromPocket.code}:
           <input type="number" {...bindFromValue} />
         </label>
         <label>
-          To Value:
+          To Value {toPocket.code}:
           <input type="number" {...bindToValue} />
         </label>
         <div>Current rate: {rate}</div>
         <input type="submit" value="Submit" />
+        {listUnSelectedPockets.map(([key, value]) => (
+          <button
+            onClick={() => {
+              onSelectToPocket(value.code);
+            }}
+          >
+            Conver to: {value.code}
+          </button>
+        ))}
       </form>
     );
   } else {
@@ -106,19 +129,20 @@ function Converter(props) {
       selectedToPocketCurrency,
       pockets
     },
-    onTransferFunds
+    onTransferFunds,
+    onSelectToPocket
   } = props;
-  const fromPocket = pockets[selectedFromPocketCurrency];
-  const toPocket = pockets[selectedToPocketCurrency];
   return (
     <div>
       <h1>Converter</h1>
 
       <ConversionForm
         selectedPocketRates={selectedPocketRates}
-        fromPocket={fromPocket}
-        toPocket={toPocket}
+        pockets={pockets}
+        selectedFromPocketCurrency={selectedFromPocketCurrency}
+        selectedToPocketCurrency={selectedToPocketCurrency}
         onTransferFunds={onTransferFunds}
+        onSelectToPocket={onSelectToPocket}
       />
     </div>
   );
