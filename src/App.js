@@ -5,6 +5,7 @@ import "./App.css";
 
 import "./components/PocketList/PocketList";
 import PocketListContainer from "./components/PocketList/PocketListContainer";
+import RatesContainer from "./components/Rates/RatesContainer";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <h1>TEST basic trading app</h1>
       </header>
       <PocketListContainer />
+      <RatesContainer />
     </div>
   );
 }

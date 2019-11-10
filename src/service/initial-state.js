@@ -2,13 +2,13 @@ export const getInitialState = () => {
   return {
     // Going on the assumption that we'll only want one at a time,
     // We can expand selectedPocketRates to have attributes per currency pocket
+    selectedPocketCurrency: {},
     selectedPocketRates: {
       isLoading: false,
       error: undefined,
-      rates: []
+      selectedRateInfo: {}
     },
-    selectedFromPocket: {},
-    selectedToPocket: {},
+    selectedToPocket: {}, // TODO: might not be needed
 
     pockets: {
       // Note: we would really load the values from the BE and have the display strings elsewhere
