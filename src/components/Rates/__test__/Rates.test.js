@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Rates } from "components/Rates/Rates";
+import expectExport from "expect";
 
 describe("Rates renders", () => {
   it("Sanity check", () => {
@@ -15,16 +16,34 @@ describe("Rates renders", () => {
     expect(true).toBeTruthy();
   });
 
+  jest.useFakeTimers();
   it("It fetches rates", () => {
     const state = {};
 
     const onFetchRatesMock = jest.fn();
 
-    const list = mount(<Rates state onFetchRates={onFetchRatesMock} />);
+    const ratesWrapper = mount(
+      <Rates state onFetchRates={onFetchRatesMock} timer={1000} />
+    );
     expect(onFetchRatesMock).toHaveBeenCalled();
-    // TODO check that timeout is working
-    // setTimeout(() => {
-    //   expect(onFetchRatesMock.mock.calls.length).toBeGreaterThan(1);
-    // }, 1000);
+    jest.runOnlyPendingTimers();
+    expect(setTimeout).toHaveBeenCalledTimes(1);
+    expect(ratesWrapper.text()).toContain("No selectedPocketRates");
+  });
+
+  it("It fetches rates", () => {
+    const state = {
+      selectedPocketRates: {}
+    };
+
+    const onFetchRatesMock = jest.fn();
+
+    const ratesWrapper = mount(
+      <Rates state onFetchRates={onFetchRatesMock} timer={1000} />
+    );
+    const ratesTitle = ratesWrapper.find("h1");
+    console.log(ratesTitle);
+    expect(ratesTitle).toHaveLength(1);
+    expect(ratesTitle.text()).toBe("Rates");
   });
 });

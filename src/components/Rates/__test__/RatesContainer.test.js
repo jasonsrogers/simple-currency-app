@@ -10,7 +10,6 @@ import { Rates } from "components/Rates/Rates";
 import reducer from "reducers/reducer";
 
 // TODO check if to use this: import configureMockStore from "redux-mock-store";
-
 const store = createStore(
   reducer,
   applyMiddleware(

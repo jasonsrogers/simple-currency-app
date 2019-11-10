@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { /*useState,*/ useEffect } from "react";
 
 let intervalId;
 
@@ -38,19 +38,20 @@ function Rates(props) {
   // will change once the proper reduces come into play ^^
   const {
     state: { selectedPocketRates },
-    onFetchRates
+    onFetchRates,
+    timer = 10000
   } = props;
 
   useEffect(() => {
     onFetchRates();
     intervalId = setInterval(() => {
       onFetchRates();
-    }, 10000);
+    }, timer);
     // cleanup up interval componentDidUnmount
     return () => {
       clearInterval(intervalId);
     };
-  }, [onFetchRates]);
+  }, [onFetchRates, timer]);
 
   return (
     <div>
