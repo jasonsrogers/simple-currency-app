@@ -4,7 +4,7 @@ let intervalId;
 
 function renderRates(rates = []) {
   return Object.entries(rates).map(([key, value]) => (
-    <div key={key}>
+    <div className="rates__rate" key={key}>
       {key}: {value}
     </div>
   ));
@@ -14,18 +14,25 @@ function renderSelectedRateInfo(selectedPocketRates = {}) {
   let { selectedRateInfo } = selectedPocketRates;
   if (selectedRateInfo) {
     /*
-        base: "USD"
-        disclaimer: "Usage subject to terms: https://openexchangerates.org/terms"
-        license: "https://openexchangerates.org/license"
-        rates: {AED: 3.6728, AFN: 78.250004, ALL: 111.7, AMD: 477.571994, ANG: 1.734311, …}
-        timestamp: 1573351212
-     */
-    const { base, timestamp, rates } = selectedRateInfo;
+    rates: {
+          CAD: 1.3196483596,
+          GBP: 0.7808410368,
+          JPY: 109.4072865688,
+          THB: 30.3851731013,
+          CHF: 0.9961029545,
+          EUR: 0.9062896502,
+          USD: 1.0,
+          ...
+        },
+        base: "USD",
+        date: "2019-11-08"
+      } */
+    const { base, date, rates } = selectedRateInfo;
     return (
       <div>
-        <div>Base: {base}</div>
-        <div>Timestamp: {timestamp}</div>
-        <div>Rates: {renderRates(rates)}</div>
+        <div className="rates__base">Base: {base}</div>
+        <div className="rates__date">Date: {date}</div>
+        <div className="rates__list-container">Rates: {renderRates(rates)}</div>
       </div>
     );
   } else {
@@ -42,15 +49,16 @@ function Rates(props) {
     timer = 10000
   } = props;
 
+  // TODO reanable polling once dev is done (locks account if to many requrests :( )
   useEffect(() => {
     onFetchRates();
-    intervalId = setInterval(() => {
-      onFetchRates();
-    }, timer);
-    // cleanup up interval componentDidUnmount
-    return () => {
-      clearInterval(intervalId);
-    };
+    // intervalId = setInterval(() => {
+    //   onFetchRates();
+    // }, timer);
+    // // cleanup up interval componentDidUnmount
+    // return () => {
+    //   clearInterval(intervalId);
+    // };
   }, [onFetchRates, timer]);
 
   return (

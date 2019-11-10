@@ -4,8 +4,9 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import "./components/PocketList/PocketList";
-import PocketListContainer from "./components/PocketList/PocketListContainer";
-import RatesContainer from "./components/Rates/RatesContainer";
+import PocketListContainer from "components/PocketList/PocketListContainer";
+import RatesContainer from "components/Rates/RatesContainer";
+import ConverterContainer from "components/Converter/ConverterContainer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <h1>TEST basic trading app</h1>
       </header>
       <PocketListContainer />
+      <ConverterContainer />
       <RatesContainer />
     </div>
   );
