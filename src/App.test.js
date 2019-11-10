@@ -1,13 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import thunkMiddleware from "redux-thunk";
 
 import App from "./App";
 import reducer from "./reducers/reducer";
-import getInitialState from "./service/initial-state";
 
-const store = createStore(reducer, { ...getInitialState() });
+const store = createStore(
+  reducer,
+  applyMiddleware(
+    thunkMiddleware // lets us dispatch() functions
+    // loggerMiddleware // neat middleware that logs actions
+  )
+);
 
 it("renders without crashing", () => {
   const div = document.createElement("div");

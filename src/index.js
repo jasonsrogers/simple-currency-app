@@ -11,8 +11,6 @@ import thunkMiddleware from "redux-thunk";
 // import { createLogger } from "redux-logger";
 
 import reducer from "./reducers/reducer";
-import { fetchRates } from "./actions/actions";
-import { startPolling } from "service/ratesService";
 
 // const loggerMiddleware = createLogger()
 const store = createStore(
@@ -34,10 +32,3 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-// store.dispatch(fetchRates("USD")).then(() => console.log(store.getState()));
-// store.dispatch(startPolling());
-// setInterva l(() => {
-//     console.log("polling");
-//     store.dispatch(fetchRates("USD")).then(() => console.log(store.getState()));
-//   }, 10000);
