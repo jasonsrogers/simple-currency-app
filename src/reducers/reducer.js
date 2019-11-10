@@ -1,5 +1,5 @@
 import getInitialState from "service/initial-state";
-import { REQUEST_RATES, RECEIVE_RATES } from "actions/actions";
+import { REQUEST_RATES, RECEIVE_RATES, TRANSFER_FUNDS } from "actions/actions";
 export default (state = { ...getInitialState() }, action) => {
   switch (action.type) {
     case REQUEST_RATES:
@@ -23,6 +23,22 @@ export default (state = { ...getInitialState() }, action) => {
           // but that could pause problems with accuracy of transfer.
           selectedRateInfo: action.selectedRateInfo
         }
+      };
+    case TRANSFER_FUNDS:
+      const { fromPocketCode, fromValue, toPocketCode, toValue } = action;
+
+      let pockets = { ...state.pockets };
+      debugger;
+      let fromPocket = { ...pockets[fromPocketCode] };
+      fromPocket.amount -= fromValue;
+      let toPocket = { ...pockets[toPocketCode] };
+      toPocket.amount += toValue;
+      pockets[fromPocketCode] = fromPocket;
+      pockets[toPocketCode] = toPocket;
+
+      return {
+        ...state,
+        pockets
       };
     default:
       return state;

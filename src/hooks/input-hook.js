@@ -13,7 +13,7 @@ export const useInput = (initialValue, changeCallback = i => i) => {
       onChange: event => {
         // this allows processing of value by parent (aka check min, max, precision...)
         let processedValue = changeCallback(event.target.value);
-        if (processedValue == undefined) {
+        if (processedValue === undefined) {
           console.log(
             `Unexpected empty processed value, changeCallback didn't receive a value to set in the field`
           );

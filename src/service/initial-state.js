@@ -2,7 +2,9 @@ export const getInitialState = () => {
   return {
     // Going on the assumption that we'll only want one at a time,
     // We can expand selectedPocketRates to have attributes per currency pocket
-    selectedPocketCurrency: {},
+    selectedFromPocketCurrency: "GBP",
+    selectedToPocketCurrency: "USD",
+
     selectedPocketRates: {
       isLoading: false,
       error: undefined,

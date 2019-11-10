@@ -10,8 +10,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchRates() {
-      dispatch(fetchRates());
+    onFetchRates(currency) {
+      dispatch(fetchRates(currency));
     }
   };
 };

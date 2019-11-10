@@ -19,9 +19,27 @@ function receiveRates(currency, selectedRateInfo) {
   };
 }
 
+export const TRANSFER_FUNDS = "TRANSFER_FUNDS";
+export function transferFunds({
+  fromPocketCode,
+  fromValue,
+  toPocketCode,
+  toValue
+} = {}) {
+  return {
+    type: TRANSFER_FUNDS,
+    fromPocketCode,
+    fromValue,
+    toPocketCode,
+    toValue
+  };
+}
+
 export function fetchRates(currency) {
   return dispatch => {
     dispatch(requestRates(currency));
-    return getRates().then(json => dispatch(receiveRates(currency, json)));
+    return getRates(currency).then(json =>
+      dispatch(receiveRates(currency, json))
+    );
   };
 }

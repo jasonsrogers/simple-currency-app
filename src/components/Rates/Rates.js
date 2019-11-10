@@ -44,14 +44,13 @@ function Rates(props) {
   // this is temp just to check that everything is connected correctly with react-redux
   // will change once the proper reduces come into play ^^
   const {
-    state: { selectedPocketRates },
+    state: { selectedPocketRates, selectedFromPocketCurrency },
     onFetchRates,
     timer = 10000
   } = props;
-
   // TODO reanable polling once dev is done (locks account if to many requrests :( )
   useEffect(() => {
-    onFetchRates();
+    onFetchRates(selectedFromPocketCurrency);
     // intervalId = setInterval(() => {
     //   onFetchRates();
     // }, timer);
