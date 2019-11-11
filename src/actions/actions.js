@@ -15,6 +15,8 @@ export function changeFromPocket(code) {
     code
   };
 }
+
+// Note: select from is a 2 step process as we want to update the rates displayed
 export function selectFromPocket(code) {
   return dispatch => {
     dispatch(changeFromPocket(code));
@@ -37,8 +39,7 @@ function receiveRates(currency, selectedRateInfo) {
   return {
     type: RECEIVE_RATES,
     currency,
-    selectedRateInfo,
-    receivedAt: Date.now()
+    selectedRateInfo
   };
 }
 

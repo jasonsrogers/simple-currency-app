@@ -1,7 +1,7 @@
 import React from "react";
 import { useInput } from "hooks/input-hook";
 
-function ConversionForm(props) {
+export function ConversionForm(props) {
   const {
     selectedPocketRates,
     onTransferFunds,
@@ -95,16 +95,26 @@ function ConversionForm(props) {
       <form onSubmit={handleSubmit}>
         <label>
           From Value {fromPocket.code}:
-          <input type="number" {...bindFromValue} />
+          <input
+            className="converter_from-value"
+            type="number"
+            {...bindFromValue}
+          />
         </label>
         <label>
           To Value {toPocket.code}:
-          <input type="number" {...bindToValue} />
+          <input
+            className="converter_to-value"
+            type="number"
+            {...bindToValue}
+          />
         </label>
         <div>Current rate: {rate}</div>
-        <input type="submit" value="Submit" />
+        <input className="converter_exchange" type="submit" value="Exchange" />
         {listUnSelectedPockets.map(([key, value]) => (
           <button
+            key={value.code}
+            className="converter_switch-currency"
             onClick={() => {
               onSelectToPocket(value.code);
             }}
