@@ -10,13 +10,13 @@ export function Header(props) {
 
   useEffect(() => {
     onFetchRates(selectedFromPocketCurrency);
-    // intervalId = setInterval(() => {
-    //   onFetchRates(selectedFromPocketCurrency);
-    // }, timer);
-    // // cleanup up interval
-    // return () => {
-    //   clearInterval(intervalId);
-    // };
+    intervalId = setInterval(() => {
+      onFetchRates(selectedFromPocketCurrency);
+    }, timer);
+    // cleanup up interval
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [onFetchRates, timer, selectedFromPocketCurrency]);
 
   return (

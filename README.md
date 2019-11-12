@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## How to run:
+
+- `yarn install` (or `npm install`)
+- `yarn start` (or `npm start`)
+- Go to `http://localhost:3000/`
+
+Additionally you can run `yarn test` to run tests
+
 ## Note:
 
 This app simulates basic currency trading.<br/>
@@ -18,7 +26,7 @@ This app simulates basic currency trading.<br/>
 - react
 - react-redux
 - react-thunk for async calls
-- styled components
+- css -> to be replaced with styled components
 - jest
 
 ### Planned State tree structure:
@@ -27,31 +35,39 @@ This app simulates basic currency trading.<br/>
 {
     // Going on the assumption that we'll only want one at a time,
     // We can expand selectedPocketRates to have attributes per currency pocket
-    selectedFromPocketCurrency: "USD",
-    selectedToPocketCurrency
-: "GBP",
+    selectedFromPocketCurrency: "GBP",
+    selectedToPocketCurrency: "USD",
+
     selectedPocketRates: {
         isLoading: false,
         error: undefined,
-        selectedRateInfo: {},
+        selectedRateInfo: {
+            ...
+        },
     },
-    selectedFromPocket: {},
-    selectedToPocket: {}, // TODO: might not be needed
 
     pockets: {
         GBP: {
-
+            ...
         },
         EUR: {
-
+            ...
         },
         USD: {
-
+            ...
         }
     }
 
 }
 ```
+
+# Next steps:
+
+- fix blinking issue on timer
+- replace css by styled components
+- leverage mapStateToProps
+- break down reducer
+- add history page
 
 # Standard React App Information
 

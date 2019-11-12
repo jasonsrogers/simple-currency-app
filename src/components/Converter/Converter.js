@@ -12,7 +12,6 @@ function Converter(props) {
     onTransferFunds,
     onSelectToPocket
   } = props;
-
   return (
     <div>
       <h1>Converter</h1>
