@@ -1,6 +1,6 @@
 import React from "react";
 import { useInput } from "hooks/input-hook";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 
 export function ConversionForm(props) {
   const {
@@ -122,7 +122,8 @@ export function ConversionForm(props) {
             value="Exchange"
           />
           {listUnSelectedPockets.map(([key, value]) => (
-            <Button
+            // TODO: why is replacing this by Button failing my tests but counting the button twice?
+            <button
               key={value.code}
               className="conversion-form__switch-currency"
               onClick={() => {
@@ -130,7 +131,7 @@ export function ConversionForm(props) {
               }}
             >
               Conver to: {value.code}
-            </Button>
+            </button>
           ))}
         </div>
       </form>
