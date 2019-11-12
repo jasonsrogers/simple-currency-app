@@ -28,7 +28,8 @@ html {
   overflow: scroll;
   height: 80vh;
   padding: 20px;
-  /* background-color: rgb(135, 209, 246); */
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .app__navbar a + a {
@@ -111,6 +112,12 @@ html {
   border-color: #ccc;
   cursor: not-allowed;
 }
+input:disabled {
+  background-color: #ccc;
+  opacity: 1;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
 
 .pocket__is-selected .pocket__amount {
   font-size: 2em;
@@ -155,7 +162,7 @@ html {
   padding: 0.7em 0;
 }
 
-.conversion-form__container div + div {
+.conversion-form__container > div + div {
   border-top: 1px solid white;
 }
 
@@ -194,4 +201,7 @@ html {
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
+}
+.conversion-form__action-container {
+  margin-top: 1em;
 }

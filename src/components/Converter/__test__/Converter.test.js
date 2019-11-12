@@ -1,8 +1,8 @@
 import { mount } from "enzyme";
 import React from "react";
 import ReactDOM from "react-dom";
-
-import { Converter, ConversionForm } from "components/Converter/Converter";
+import { Converter } from "components/Converter/Converter";
+import { ConversionForm } from "components/Converter/ConversionForm";
 
 const basicState = {
   selectedPocketRates: {},

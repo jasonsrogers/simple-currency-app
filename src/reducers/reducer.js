@@ -1,3 +1,7 @@
+// Main reducer of app
+// TODO: if this grows 
+
+
 import getInitialState from "service/initial-state";
 import {
   REQUEST_RATES,
@@ -50,7 +54,9 @@ export default (state = { ...getInitialState() }, action) => {
 
       let pockets = { ...state.pockets };
       let fromPocket = { ...pockets[fromPocketCode] };
-      fromPocket.amount -= fromValue;
+      // fromPocket.amount -= fromValue; // => error in float substract
+      fromPocket.amount = (fromPocket.amount - fromValue).toFixed(2) * 1;
+      // fromPocket.amount = (fromPocket.amount * 100 - fromValue * 100) / 100;
       let toPocket = { ...pockets[toPocketCode] };
       toPocket.amount += toValue;
       pockets[fromPocketCode] = fromPocket;

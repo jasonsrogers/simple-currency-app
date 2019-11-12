@@ -1,53 +1,12 @@
 import React /*useState*/ from "react";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
-
-export function Pocket(props) {
-  const {
-    pocket: { code, amount, symbol, description },
-    onSelectPocket,
-    isPocketSelected
-  } = props;
-  return (
-    <div
-      className={
-        "pocket__container " + (isPocketSelected ? "pocket__is-selected" : "")
-      }
-    >
-      <div className="pocket__info">
-        <div className="pocket__amount">
-          {symbol} {amount}
-        </div>
-        <div className="pocket__description">{description}</div>
-      </div>
-      <div className="pocket__button-container">
-        {!isPocketSelected && (
-          <Button
-            onClick={() => {
-              onSelectPocket(code);
-            }}
-          >
-            Select
-          </Button>
-        )}
-        {isPocketSelected && (
-          <div className="pocket__nav">
-            <Button disabled>Top Up</Button>
-            <Link to="/exchange">Exchange</Link>
-            <Button disabled>Bank</Button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+import { Pocket } from "components/PocketList/Pocket";
 
 const renderListPockets = (
   list = {},
   onSelectPocket,
   selectedFromPocketCurrency
 ) => {
-  // TODO: should I change to a list of pockets, not sure if the convenience of pockets.GBP is worth the weird mapping
   let entries = Object.entries(list);
   if (entries.length) {
     return (
@@ -70,6 +29,8 @@ const renderListPockets = (
   }
 };
 
+
+// Component that contains the list of Pocket
 function PocketList(props) {
   // this is temp just to check that everything is connected correctly with react-redux
   // will change once the proper reduces come into play ^^

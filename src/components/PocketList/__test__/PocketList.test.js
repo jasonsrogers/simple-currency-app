@@ -1,7 +1,8 @@
 import { mount } from "enzyme";
 import React from "react";
 import ReactDOM from "react-dom";
-import { PocketList, Pocket } from "components/PocketList/PocketList";
+import { PocketList } from "components/PocketList/PocketList";
+import { Pocket } from "components/PocketList/Pocket";
 
 describe("Pocket list renders", () => {
   it("Sanity check", () => {

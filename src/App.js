@@ -1,14 +1,20 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import "./components/PocketList/PocketList";
 
-import Header from "components/Header/Header";
+import HeaderContainer from "components/Header/HeaderContainer";
 import PocketListContainer from "components/PocketList/PocketListContainer";
 import RatesContainer from "components/Rates/RatesContainer";
 import ConverterContainer from "components/Converter/ConverterContainer";
@@ -17,9 +23,10 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <Header />
+        <HeaderContainer />
         <div className="app__main">
           <Switch>
+            <Redirect from="/" exact to="/pocket" />
             <Route path="/pocket" component={PocketListContainer}></Route>
             <Route path="/exchange" component={ConverterContainer}></Route>
             <Route path="/Rates" component={RatesContainer}></Route>

@@ -1,5 +1,7 @@
 import { getRates } from "service/ratesService";
 
+// TODO: split in sub action folders if this grows more
+
 export const SELECT_TO_POCKET = "SELECT_TO_POCKET";
 export function selectToPocket(code) {
   return {
@@ -23,8 +25,6 @@ export function selectFromPocket(code) {
     dispatch(fetchRates(code));
   };
 }
-
-//selectedFromPocketCurrency
 
 export const REQUEST_RATES = "REQUEST_RATES";
 function requestRates(currency) {

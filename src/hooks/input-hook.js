@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// hook helper to tie local component state without clogging up component
 export const useInput = (initialValue, changeCallback = i => i) => {
   const [value, setValue] = useState(initialValue);
 
