@@ -1,5 +1,6 @@
 import React from "react";
 import { useInput } from "hooks/input-hook";
+import Button from "react-bootstrap/Button";
 
 export function ConversionForm(props) {
   const {
@@ -92,36 +93,46 @@ export function ConversionForm(props) {
     );
 
     return (
-      <form onSubmit={handleSubmit}>
-        <label>
-          From Value {fromPocket.code}:
+      <form className="conversion-form__container" onSubmit={handleSubmit}>
+        <div className="conversion-form__from-field">
+          <label>
+            From Value {fromPocket.code}:
+            <input
+              className="conversion-form__from-value"
+              type="number"
+              {...bindFromValue}
+            />
+          </label>
+        </div>
+        <div className="conversion-form__to-field">
+          <label>
+            To Value {toPocket.code}:
+            <input
+              className="conversion-form__to-value"
+              type="number"
+              {...bindToValue}
+            />
+          </label>
+        </div>
+        <div className="conversion-form__footer">
+          <div>Current rate: {rate}</div>
           <input
-            className="converter_from-value"
-            type="number"
-            {...bindFromValue}
+            className="conversion-form__exchange"
+            type="submit"
+            value="Exchange"
           />
-        </label>
-        <label>
-          To Value {toPocket.code}:
-          <input
-            className="converter_to-value"
-            type="number"
-            {...bindToValue}
-          />
-        </label>
-        <div>Current rate: {rate}</div>
-        <input className="converter_exchange" type="submit" value="Exchange" />
-        {listUnSelectedPockets.map(([key, value]) => (
-          <button
-            key={value.code}
-            className="converter_switch-currency"
-            onClick={() => {
-              onSelectToPocket(value.code);
-            }}
-          >
-            Conver to: {value.code}
-          </button>
-        ))}
+          {listUnSelectedPockets.map(([key, value]) => (
+            <Button
+              key={value.code}
+              className="conversion-form__switch-currency"
+              onClick={() => {
+                onSelectToPocket(value.code);
+              }}
+            >
+              Conver to: {value.code}
+            </Button>
+          ))}
+        </div>
       </form>
     );
   } else {
@@ -142,6 +153,7 @@ function Converter(props) {
     onTransferFunds,
     onSelectToPocket
   } = props;
+
   return (
     <div>
       <h1>Converter</h1>

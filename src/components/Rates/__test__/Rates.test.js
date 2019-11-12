@@ -56,12 +56,12 @@ describe("Rates renders", () => {
     );
     const ratesTitle = ratesWrapper.find("h1");
     expect(ratesTitle).toHaveLength(1);
-    expect(ratesTitle.text()).toBe("Rates");
+    expect(ratesTitle.text()).toBe("Rates:");
     expect(ratesWrapper.text()).toContain("Base: USD");
     expect(ratesWrapper.find(".rates__base").text()).toBe("Base: USD");
     expect(ratesWrapper.find(".rates__date").text()).toBe("Date: 2019-11-08");
     expect(ratesWrapper.find(".rates__rate")).toHaveLength(7);
-    expect(ratesWrapper.find(".rates__list-container").text()).toContain(
+    expect(ratesWrapper.find(".rates__list").text()).toContain(
       "EUR: 0.9062896502"
     );
   });

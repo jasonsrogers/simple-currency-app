@@ -1,18 +1,18 @@
 import { mount } from "enzyme";
 import React from "react";
 import ReactDOM from "react-dom";
-import { PocketList } from "components/PocketList/PocketList";
+import { PocketList, Pocket } from "components/PocketList/PocketList";
 
 describe("Pocket list renders", () => {
   it("Sanity check", () => {
     const div = document.createElement("div");
     const state = {};
-    ReactDOM.render(<PocketList state />, div);
+    ReactDOM.render(<PocketList state={state} />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
   it("Renders an empty list message", () => {
     const state = {};
-    const list = mount(<PocketList state />);
+    const list = mount(<PocketList state={state} />);
     expect(list.text()).toContain("No pockets configured");
   });
   it("Renders a pocket", () => {
@@ -27,7 +27,7 @@ describe("Pocket list renders", () => {
       }
     };
     const list = mount(<PocketList state={state} />);
-    expect(list.text()).toContain("GBP");
+    expect(list.text()).toContain("£");
   });
 
   it("Renders 3 pockets", () => {
@@ -54,6 +54,6 @@ describe("Pocket list renders", () => {
       }
     };
     const list = mount(<PocketList state={state} />);
-    expect(list.find("li").length).toBe(3);
+    expect(list.find(Pocket).length).toBe(3);
   });
 });

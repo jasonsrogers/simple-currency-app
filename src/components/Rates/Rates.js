@@ -1,6 +1,4 @@
-import React, { /*useState,*/ useEffect } from "react";
-
-let intervalId;
+import React, { useEffect } from "react";
 
 function renderRates(rates = []) {
   return Object.entries(rates).map(([key, value]) => (
@@ -30,9 +28,11 @@ function renderSelectedRateInfo(selectedPocketRates = {}) {
     const { base, date, rates } = selectedRateInfo;
     return (
       <div>
-        <div className="rates__base">Base: {base}</div>
-        <div className="rates__date">Date: {date}</div>
-        <div className="rates__list-container">Rates: {renderRates(rates)}</div>
+        <div className="rates__info">
+          <div className="rates__base">Base: {base}</div>
+          <div className="rates__date">Date: {date}</div>
+        </div>
+        <div className="rates__list">{renderRates(rates)}</div>
       </div>
     );
   } else {
@@ -45,24 +45,15 @@ function Rates(props) {
   // will change once the proper reduces come into play ^^
   const {
     state: { selectedPocketRates, selectedFromPocketCurrency },
-    onFetchRates,
-    timer = 10000
+    onFetchRates
   } = props;
-  // TODO reanable polling once dev is done (locks account if to many requrests :( )
   useEffect(() => {
     onFetchRates(selectedFromPocketCurrency);
-    // intervalId = setInterval(() => {
-    //   onFetchRates();
-    // }, timer);
-    // // cleanup up interval componentDidUnmount
-    // return () => {
-    //   clearInterval(intervalId);
-    // };
-  }, [onFetchRates, timer]);
+  }, [onFetchRates, selectedFromPocketCurrency]);
 
   return (
     <div>
-      <h1>Rates</h1>
+      <h1>Rates:</h1>
       {renderSelectedRateInfo(selectedPocketRates)}
     </div>
   );

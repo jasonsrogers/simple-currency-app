@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import PocketListContainer from "components/PocketList/PocketListContainer";
 import { PocketList } from "components/PocketList/PocketList";
 import reducer from "reducers/reducer";
+import { BrowserRouter as Router} from "react-router-dom";
 
 // TODO check if to use this: import configureMockStore from "redux-mock-store";
 
@@ -24,7 +25,9 @@ describe("Pocket list container renders", () => {
 
     ReactDOM.render(
       <Provider store={store}>
-        <PocketListContainer />
+        <Router>
+          <PocketListContainer />
+        </Router>
       </Provider>,
       div
     );
@@ -34,11 +37,13 @@ describe("Pocket list container renders", () => {
   it("Renders a pocket list", () => {
     const container = mount(
       <Provider store={store}>
-        <PocketListContainer />
+        <Router>
+          <PocketListContainer />
+        </Router>
       </Provider>
     );
     expect(container.find(PocketList)).toBeTruthy();
     // check that it renders one of the default pockets
-    expect(container.text()).toContain("GBP");
+    expect(container.text()).toContain("£");
   });
 });
