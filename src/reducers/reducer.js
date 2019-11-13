@@ -59,7 +59,10 @@ export default (state = { ...getInitialState() }, action) => {
       fromPocket.amount = (fromPocket.amount - fromValue).toFixed(2) * 1;
       // fromPocket.amount = (fromPocket.amount * 100 - fromValue * 100) / 100;
       let toPocket = { ...pockets[toPocketCode] };
-      toPocket.amount += toValue;
+      // toPocket.amount += toValue; // => error in float add
+      toPocket.amount = (toPocket.amount + toValue).toFixed(2) * 1;
+      // toPocket.amount = (toPocket.amount * 100 + toValue * 100) / 100;
+
       pockets[fromPocketCode] = fromPocket;
       pockets[toPocketCode] = toPocket;
 
