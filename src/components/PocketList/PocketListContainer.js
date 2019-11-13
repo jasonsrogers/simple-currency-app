@@ -3,8 +3,10 @@ import { PocketList } from "components/PocketList/PocketList";
 import { selectFromPocket } from "actions/actions";
 
 const mapStateToProps = state => {
+  const { pockets = {}, selectedFromPocketCurrency } = state
   return {
-    state
+    pockets,
+    selectedFromPocketCurrency
   };
 };
 

@@ -32,27 +32,25 @@ describe("Rates renders", () => {
 
   it("It fetches rates", () => {
     const state = {
-      selectedPocketRates: {
-        selectedRateInfo: {
-          rates: {
-            CAD: 1.3196483596,
-            GBP: 0.7808410368,
-            JPY: 109.4072865688,
-            THB: 30.3851731013,
-            CHF: 0.9961029545,
-            EUR: 0.9062896502,
-            USD: 1.0
-          },
-          base: "USD",
-          date: "2019-11-08"
-        }
+      selectedRateInfo: {
+        rates: {
+          CAD: 1.3196483596,
+          GBP: 0.7808410368,
+          JPY: 109.4072865688,
+          THB: 30.3851731013,
+          CHF: 0.9961029545,
+          EUR: 0.9062896502,
+          USD: 1.0
+        },
+        base: "USD",
+        date: "2019-11-08"
       }
     };
 
     const onFetchRatesMock = jest.fn();
 
     const ratesWrapper = mount(
-      <Rates state={state} onFetchRates={onFetchRatesMock} timer={1000} />
+      <Rates {...state} onFetchRates={onFetchRatesMock} timer={1000} />
     );
     const ratesTitle = ratesWrapper.find("h1");
     expect(ratesTitle).toHaveLength(1);

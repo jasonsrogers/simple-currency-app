@@ -3,8 +3,9 @@ import { Header } from "components/Header/Header";
 import { fetchRates } from "actions/actions";
 
 const mapStateToProps = state => {
+  const { selectedFromPocketCurrency } = state;
   return {
-    state
+    selectedFromPocketCurrency
   };
 };
 

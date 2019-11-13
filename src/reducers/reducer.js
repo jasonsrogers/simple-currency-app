@@ -1,6 +1,5 @@
 // Main reducer of app
-// TODO: if this grows 
-
+// TODO: if this grows
 
 import getInitialState from "service/initial-state";
 import {
@@ -28,13 +27,15 @@ export default (state = { ...getInitialState() }, action) => {
       };
 
     case REQUEST_RATES:
+      let selectedPocketRates = {
+        ...state.selectedPocketRates,
+        ...{ isLoading: true, error: undefined }
+      };
+
       return {
         ...state,
         selectedPocketCurrency: action.currency,
-        selectedPocketRates: {
-          isLoading: true,
-          error: undefined
-        }
+        ...selectedPocketRates
       };
     case RECEIVE_RATES:
       return {
@@ -44,7 +45,7 @@ export default (state = { ...getInitialState() }, action) => {
           isLoading: false,
           error: undefined,
           // Note:  I think that FOR THIS APP we should maintain the old rate until we receive
-          // the new one just in case it fails (better display the last rate we had than none)
+          // the() new one just in case it fails (better display the last rate we had than none)
           // but that could pause problems with accuracy of transfer.
           selectedRateInfo: action.selectedRateInfo
         }
@@ -58,7 +59,10 @@ export default (state = { ...getInitialState() }, action) => {
       fromPocket.amount = (fromPocket.amount - fromValue).toFixed(2) * 1;
       // fromPocket.amount = (fromPocket.amount * 100 - fromValue * 100) / 100;
       let toPocket = { ...pockets[toPocketCode] };
-      toPocket.amount += toValue;
+      // toPocket.amount += toValue; // => error in float add
+      toPocket.amount = (toPocket.amount + toValue).toFixed(2) * 1;
+      // toPocket.amount = (toPocket.amount * 100 + toValue * 100) / 100;
+
       pockets[fromPocketCode] = fromPocket;
       pockets[toPocketCode] = toPocket;
 

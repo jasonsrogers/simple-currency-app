@@ -27,7 +27,7 @@ describe("Pocket list renders", () => {
         }
       }
     };
-    const list = mount(<PocketList state={state} />);
+    const list = mount(<PocketList {...state} />);
     expect(list.text()).toContain("£");
   });
 
@@ -54,7 +54,7 @@ describe("Pocket list renders", () => {
         }
       }
     };
-    const list = mount(<PocketList state={state} />);
+    const list = mount(<PocketList {...state} />);
     expect(list.find(Pocket).length).toBe(3);
   });
 });
