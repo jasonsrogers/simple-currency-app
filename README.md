@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## How to run:
 
-- `yarn install` (or `npm install`)
+- `yarn` (or `npm install`)
 - `yarn start` (or `npm start`)
 - Go to `http://localhost:3000/`
 
