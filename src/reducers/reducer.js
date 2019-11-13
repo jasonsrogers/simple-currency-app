@@ -1,6 +1,5 @@
 // Main reducer of app
-// TODO: if this grows 
-
+// TODO: if this grows
 
 import getInitialState from "service/initial-state";
 import {
@@ -28,13 +27,15 @@ export default (state = { ...getInitialState() }, action) => {
       };
 
     case REQUEST_RATES:
+      let selectedPocketRates = {
+        ...state.selectedPocketRates,
+        ...{ isLoading: true, error: undefined }
+      };
+
       return {
         ...state,
         selectedPocketCurrency: action.currency,
-        selectedPocketRates: {
-          isLoading: true,
-          error: undefined
-        }
+        ...selectedPocketRates
       };
     case RECEIVE_RATES:
       return {
@@ -44,7 +45,7 @@ export default (state = { ...getInitialState() }, action) => {
           isLoading: false,
           error: undefined,
           // Note:  I think that FOR THIS APP we should maintain the old rate until we receive
-          // the new one just in case it fails (better display the last rate we had than none)
+          // the() new one just in case it fails (better display the last rate we had than none)
           // but that could pause problems with accuracy of transfer.
           selectedRateInfo: action.selectedRateInfo
         }

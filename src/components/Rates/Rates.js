@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 
-// TODO: move into separate component ?
-function renderRates(rates = []) {
+function Rate(props) {
+  const { rates = [] } = props;
   return Object.entries(rates).map(([key, value]) => (
     <div className="rates__rate" key={key}>
       {key}: {value}
     </div>
   ));
 }
-// TODO: move into separate component ?
-function renderSelectedRateInfo(selectedRateInfo) {
+
+function SelectedRateInfo(props) {
+  const { selectedRateInfo } = props;
   if (selectedRateInfo) {
     const { base, date, rates } = selectedRateInfo;
     return (
@@ -18,7 +19,9 @@ function renderSelectedRateInfo(selectedRateInfo) {
           <div className="rates__base">Base: {base}</div>
           <div className="rates__date">Date: {date}</div>
         </div>
-        <div className="rates__list">{renderRates(rates)}</div>
+        <div className="rates__list">
+          <Rate rates={rates} />
+        </div>
       </div>
     );
   } else {
@@ -36,7 +39,7 @@ function Rates(props) {
   return (
     <div>
       <h1>Rates:</h1>
-      {renderSelectedRateInfo(selectedRateInfo)}
+      <SelectedRateInfo selectedRateInfo={selectedRateInfo} />
     </div>
   );
 }
