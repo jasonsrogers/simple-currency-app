@@ -2,11 +2,7 @@ import React, { useEffect } from "react";
 
 let intervalId;
 export function Header(props) {
-  const {
-    state: { selectedFromPocketCurrency },
-    onFetchRates,
-    timer = 10000
-  } = props;
+  const { selectedFromPocketCurrency, onFetchRates, timer = 10000 } = props;
 
   useEffect(() => {
     onFetchRates(selectedFromPocketCurrency);
