@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 
-
-// TODO: move into separate component ? 
+// TODO: move into separate component ?
 function renderRates(rates = []) {
   return Object.entries(rates).map(([key, value]) => (
     <div className="rates__rate" key={key}>
@@ -9,9 +8,8 @@ function renderRates(rates = []) {
     </div>
   ));
 }
-// TODO: move into separate component ? 
-function renderSelectedRateInfo(selectedPocketRates = {}) {
-  let { selectedRateInfo } = selectedPocketRates;
+// TODO: move into separate component ?
+function renderSelectedRateInfo(selectedRateInfo) {
   if (selectedRateInfo) {
     const { base, date, rates } = selectedRateInfo;
     return (
@@ -30,12 +28,7 @@ function renderSelectedRateInfo(selectedPocketRates = {}) {
 
 // Simple component to render list of Rates
 function Rates(props) {
-  // this is temp just to check that everything is connected correctly with react-redux
-  // will change once the proper reduces come into play ^^
-  const {
-    state: { selectedPocketRates, selectedFromPocketCurrency },
-    onFetchRates
-  } = props;
+  const { selectedFromPocketCurrency, selectedRateInfo, onFetchRates } = props;
   useEffect(() => {
     onFetchRates(selectedFromPocketCurrency);
   }, [onFetchRates, selectedFromPocketCurrency]);
@@ -43,7 +36,7 @@ function Rates(props) {
   return (
     <div>
       <h1>Rates:</h1>
-      {renderSelectedRateInfo(selectedPocketRates)}
+      {renderSelectedRateInfo(selectedRateInfo)}
     </div>
   );
 }
