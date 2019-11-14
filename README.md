@@ -34,6 +34,7 @@ This app simulates basic currency trading.<br/>
 ```
 {
     // Going on the assumption that we'll only want one at a time,
+
     // We can expand selectedPocketRates to have attributes per currency pocket
     selectedFromPocketCurrency: "GBP",
     selectedToPocketCurrency: "USD",
