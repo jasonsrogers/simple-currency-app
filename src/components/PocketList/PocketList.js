@@ -31,8 +31,6 @@ const renderListPockets = (
 
 // Component that contains the list of Pocket
 function PocketList(props) {
-  // this is temp just to check that everything is connected correctly with react-redux
-  // will change once the proper reduces come into play ^^
   const { pockets = {}, selectedFromPocketCurrency, onSelectPocket } = props;
 
   return (

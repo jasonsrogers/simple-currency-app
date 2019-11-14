@@ -3,8 +3,15 @@ import { Rates } from "components/Rates/Rates";
 import { fetchRates } from "actions/actions";
 
 const mapStateToProps = state => {
+  const {
+    selectedPocketRates,
+    selectedFromPocketCurrency,
+    selectedPocketRates: { selectedRateInfo }
+  } = state;
   return {
-    state
+    selectedPocketRates,
+    selectedFromPocketCurrency,
+    selectedRateInfo
   };
 };
 
