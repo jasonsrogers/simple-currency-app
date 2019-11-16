@@ -62,6 +62,10 @@ This app simulates basic currency trading.<br/>
 }
 ```
 
+# TODO/BUGS
+
+- changing currency in converter doesn't recalculate !!!
+
 # Next steps:
 
 - fix blinking issue on timer

@@ -153,6 +153,7 @@ export function ConversionForm(props) {
                 key={value.code}
                 className="conversion-form__switch-currency"
                 onClick={() => {
+                  // TODO this doesn't recalculate values on select !!!!
                   onSelectToPocket(value.code);
                 }}
               >
