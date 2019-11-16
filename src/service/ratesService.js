@@ -10,3 +10,7 @@ export function getRates(currency = "USD") {
     console.error("Failed to load currency, TBC what to do: ", error);
   }
 }
+
+export function roundValue(val, dec = 2) {
+  return val.toFixed(dec) * 1;
+}

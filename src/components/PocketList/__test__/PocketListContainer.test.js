@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import PocketListContainer from "components/PocketList/PocketListContainer";
 import { PocketList } from "components/PocketList/PocketList";
 import reducer from "reducers/reducer";
-import { BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 // TODO check if to use this: import configureMockStore from "redux-mock-store";
 

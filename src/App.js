@@ -12,7 +12,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import "./components/PocketList/PocketList";
+import "./components/PocketList/List";
 
 import HeaderContainer from "components/Header/HeaderContainer";
 import PocketListContainer from "components/PocketList/PocketListContainer";

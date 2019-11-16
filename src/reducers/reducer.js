@@ -28,15 +28,16 @@ export default (state = { ...getInitialState() }, action) => {
 
     case REQUEST_RATES:
       let selectedPocketRates = {
+        // keept the previous rates until next ones loaded to avoid blink
         ...state.selectedPocketRates,
         ...{ isLoading: true, error: undefined }
       };
-
       return {
         ...state,
         selectedPocketCurrency: action.currency,
-        ...selectedPocketRates
+        selectedPocketRates
       };
+
     case RECEIVE_RATES:
       return {
         ...state,
