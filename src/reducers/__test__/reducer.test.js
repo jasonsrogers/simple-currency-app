@@ -1,6 +1,6 @@
 import reducer from "../reducer";
 
-const initialState = describe("Reducers: ", () => {
+describe("Reducers: ", () => {
   it("should return the initial state", () => {
     expect(reducer(undefined, {})).toEqual({
       pockets: {

@@ -1,6 +1,8 @@
 // Main reducer of app
 // TODO: if this grows
 
+import { roundAdd, roundSub } from "service/ratesService";
+
 import getInitialState from "service/initial-state";
 import {
   REQUEST_RATES,
@@ -57,12 +59,11 @@ export default (state = { ...getInitialState() }, action) => {
       let pockets = { ...state.pockets };
       let fromPocket = { ...pockets[fromPocketCode] };
       // fromPocket.amount -= fromValue; // => error in float substract
-      fromPocket.amount = (fromPocket.amount - fromValue).toFixed(2) * 1;
-      // fromPocket.amount = (fromPocket.amount * 100 - fromValue * 100) / 100;
+      fromPocket.amount = roundSub(fromPocket.amount, fromValue);
+
       let toPocket = { ...pockets[toPocketCode] };
       // toPocket.amount += toValue; // => error in float add
-      toPocket.amount = (toPocket.amount + toValue).toFixed(2) * 1;
-      // toPocket.amount = (toPocket.amount * 100 + toValue * 100) / 100;
+      toPocket.amount = roundAdd(toPocket.amount, toValue);
 
       pockets[fromPocketCode] = fromPocket;
       pockets[toPocketCode] = toPocket;
