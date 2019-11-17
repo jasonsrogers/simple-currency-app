@@ -19,7 +19,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --modulePaths=src",
-    "eject": "react-scripts eject"
+    "test-pre-commit": "cross-env CI=true react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "eslint src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test-pre-commit",
+      "pre-push": "npm run lint && npm run test-pre-commit"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,7 +45,9 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^6.0.3",
     "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1"
+    "enzyme-adapter-react-16": "^1.15.1",
+    "husky": "^3.0.9"
   }
 }
