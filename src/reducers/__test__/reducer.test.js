@@ -82,4 +82,59 @@ const initialState = describe("Reducers: ", () => {
     };
     expect(res.selectedPocketRates).toEqual(selectedPocketRates);
   });
+
+  it("should transfer money between pockets, round values", () => {
+    const fromPocketCode = "EUR";
+    const toPocketCode = "GBP";
+    let res = reducer(undefined, {
+      type: "TRANSFER_FUNDS",
+      fromPocketCode,
+      fromValue: 15,
+      toPocketCode,
+      toValue: 10
+    });
+
+    const resFromPocket = {
+      code: "EUR",
+      amount: 219.23,
+      symbol: "€",
+      description: "Euro"
+    };
+    const resToPocket = {
+      code: "GBP",
+      amount: 133.12,
+      symbol: "£",
+      description: "British Pound"
+    };
+
+    expect(res.pockets[fromPocketCode]).toEqual(resFromPocket);
+    expect(res.pockets[toPocketCode]).toEqual(resToPocket);
+  });
+  it("should transfer money between pockets, float values", () => {
+    const fromPocketCode = "EUR";
+    const toPocketCode = "GBP";
+    let res = reducer(undefined, {
+      type: "TRANSFER_FUNDS",
+      fromPocketCode,
+      fromValue: 15.15,
+      toPocketCode,
+      toValue: 10.45
+    });
+
+    const resFromPocket = {
+      code: "EUR",
+      amount: 219.08,
+      symbol: "€",
+      description: "Euro"
+    };
+    const resToPocket = {
+      code: "GBP",
+      amount: 133.57,
+      symbol: "£",
+      description: "British Pound"
+    };
+
+    expect(res.pockets[fromPocketCode]).toEqual(resFromPocket);
+    expect(res.pockets[toPocketCode]).toEqual(resToPocket);
+  });
 });
