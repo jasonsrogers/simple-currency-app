@@ -1,12 +1,11 @@
 import React from "react";
 import { useInput } from "hooks/input-hook";
-
-// import Button from "react-bootstrap/Button";
+import { roundValue } from "service/ratesService";
+import Button from "react-bootstrap/Button";
 // import { useHistory } from "react-router-dom";
 
 // TODO: make exchange navigate back to pockets page
 
-// TODO: this creates a horrible blink once the timer is activated
 export function ConversionForm(props) {
   //
   // const history = useHistory();
@@ -26,14 +25,6 @@ export function ConversionForm(props) {
   const { rates } = selectedRateInfo;
   let rate;
 
-  // Helper function for rounding
-  // TODO: move to shared helper class to reuse in other areas
-  function roundNumber(value) {
-    // not sure if truncating or rounding it better
-    return value.toFixed(2) * 1;
-    // return Math.round(value * 100) / 100;
-  }
-
   // helper function to extract rate
   function getCurrencyExchangeRate(rates = {}, toCurrency) {
     return rates[toCurrency];
@@ -47,7 +38,7 @@ export function ConversionForm(props) {
     fromValue = Math.min(pocket.amount, fromValue);
 
     let newToValue = fromValue * rate;
-    newToValue = roundNumber(newToValue);
+    newToValue = roundValue(newToValue);
     setToValue(newToValue);
     return fromValue;
   }
@@ -57,13 +48,13 @@ export function ConversionForm(props) {
   // Maybe displaying message if it excess would be a better experience
   function onToChange({ value, rate, pocket }) {
     let maxFromPocketAmount = pocket.amount * rate;
-    maxFromPocketAmount = roundNumber(maxFromPocketAmount);
+    maxFromPocketAmount = roundValue(maxFromPocketAmount);
 
     let newToValue = Math.max(0, value);
     newToValue = Math.min(maxFromPocketAmount, newToValue);
 
     let newFromValue = newToValue / rate;
-    newFromValue = roundNumber(newFromValue);
+    newFromValue = roundValue(newFromValue);
 
     setFromValue(newFromValue);
     return newToValue;
@@ -86,6 +77,10 @@ export function ConversionForm(props) {
     return onToChange({ value, rate, pocket: fromPocket });
   });
 
+  const resetFields = () => {
+    resetFromValue();
+    resetToValue();
+  };
   // handle the actual transfer
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -96,9 +91,7 @@ export function ConversionForm(props) {
       toPocketCode: toPocket.code,
       toValue
     });
-    resetFromValue();
-    resetToValue();
-
+    resetFields();
     // TODO: causes problem with jest, disabled for now
     // history.push("/pocket");
   };
@@ -149,16 +142,19 @@ export function ConversionForm(props) {
             />
             {listUnSelectedPockets.map(([key, value]) => (
               // TODO: why is replacing this by Button failing my tests but counting the button twice?
-              <button
+              <Button
                 key={value.code}
-                className="conversion-form__switch-currency"
+                className={
+                  "conversion-form__switch-currency conversion-form__switch-currency-" +
+                  value.code
+                }
                 onClick={() => {
-                  // TODO this doesn't recalculate values on select !!!!
                   onSelectToPocket(value.code);
+                  resetFields();
                 }}
               >
                 To: {value.code}
-              </button>
+              </Button>
             ))}
           </div>
         </div>

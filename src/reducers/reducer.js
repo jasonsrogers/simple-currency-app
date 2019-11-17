@@ -1,5 +1,5 @@
 // Main reducer of app
-// TODO: if this grows
+// TODO: split if this grows
 
 import { roundAdd, roundSub } from "service/ratesService";
 

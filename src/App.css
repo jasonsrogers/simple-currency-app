@@ -183,7 +183,7 @@ input:disabled {
   line-height: 1.5;
   border-radius: 0.25rem;
 }
-.conversion-form__switch-currency {
+[class^="conversion-form__switch-currency"] {
   color: white;
   background-color: #09d3ac;
   border-color: #09d3ac;
