@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // Component that displays and handles Pocket informatio
 export function Pocket(props) {
   const {
-    pocket: { code, amount, symbol, description },
+    pocket: { code, amount, symbol, description } = {},
     onSelectPocket,
     isPocketSelected
   } = props;
