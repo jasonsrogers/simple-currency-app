@@ -2,6 +2,7 @@ import { mount } from "enzyme";
 import React from "react";
 import ReactDOM from "react-dom";
 import { ConversionForm } from "components/Converter/ConversionForm";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const basicState = {
   selectedPocketRates: {},
@@ -99,13 +100,22 @@ describe("Converter: component renders correctly", () => {
 
     // not checking calls, just atomic test to check that it works at it's most basic
     // TODO: should component render without any props ?
-    ReactDOM.render(<ConversionForm {...basicState} />, div);
+    ReactDOM.render(
+      <Router>
+        <ConversionForm {...basicState} />
+      </Router>,
+      div
+    );
     ReactDOM.unmountComponentAtNode(div);
     expect(true).toBeTruthy();
   });
 
   it("Displays No pocket selected yet", () => {
-    const converterWrapper = mount(<ConversionForm {...basicState} />);
+    const converterWrapper = mount(
+      <Router>
+        <ConversionForm {...basicState} />
+      </Router>
+    );
     expect(converterWrapper.find(ConversionForm)).toBeTruthy();
     expect(converterWrapper.find(ConversionForm).text()).toContain(
       "No pocket selected yet"
@@ -115,7 +125,11 @@ describe("Converter: component renders correctly", () => {
     ).toBeFalsy();
   });
   it("Displays conversion form/to", async () => {
-    const converterWrapper = mount(<ConversionForm {...fullState} />);
+    const converterWrapper = mount(
+      <Router>
+        <ConversionForm {...fullState} />
+      </Router>
+    );
     const text = await converterWrapper.text();
     expect(text).toContain("From Value EUR");
     expect(text).toContain("To Value USD");
@@ -126,7 +140,11 @@ describe("Converter: component renders correctly", () => {
     ).toBeTruthy();
   });
   it("Displays conversion from (awaiting the selection of a to)", async () => {
-    const converterWrapper = mount(<ConversionForm {...fullState} />);
+    const converterWrapper = mount(
+      <Router>
+        <ConversionForm {...fullState} />
+      </Router>
+    );
     const text = await converterWrapper.text();
     expect(text).toContain("From Value EUR");
     expect(text).toContain("To Value USD");
@@ -137,7 +155,11 @@ describe("Converter: component renders correctly", () => {
     ).toHaveLength(1);
   });
   it("Displays conversion form", async () => {
-    const converterWrapper = mount(<ConversionForm {...partialState} />);
+    const converterWrapper = mount(
+      <Router>
+        <ConversionForm {...partialState} />
+      </Router>
+    );
     const text = await converterWrapper.text();
     expect(text).toContain("From Value EUR");
     expect(text).toContain("To Value");
@@ -152,7 +174,12 @@ describe("Converter: component inputs/buttons", () => {
   it("Should trigger select pocket callback", () => {
     const mockOnSelectToPocket = jest.fn();
     const converterWrapper = mount(
-      <ConversionForm {...fullState} onSelectToPocket={mockOnSelectToPocket} />
+      <Router>
+        <ConversionForm
+          {...fullState}
+          onSelectToPocket={mockOnSelectToPocket}
+        />
+      </Router>
     );
 
     const button = converterWrapper.find(
@@ -165,8 +192,11 @@ describe("Converter: component inputs/buttons", () => {
 
   it("Should trigger select exchange callback", () => {
     const mockOnTransferFunds = jest.fn();
+
     const converterWrapper = mount(
-      <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+      <Router>
+        <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+      </Router>
     );
     const button = converterWrapper.find(".conversion-form__exchange");
     expect(button).toHaveLength(1);
@@ -178,10 +208,13 @@ describe("Converter: component inputs/buttons", () => {
       toValue: ""
     });
   });
+
   it("Should trigger exchange with field values", () => {
     const mockOnTransferFunds = jest.fn();
     const converterWrapper = mount(
-      <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+      <Router>
+        <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+      </Router>
     );
     const submitButton = converterWrapper.find(".conversion-form__exchange");
     const fromValue = converterWrapper.find(".conversion-form__from-value");
@@ -204,7 +237,9 @@ describe("Converter: component inputs/buttons", () => {
   it("Should trigger exchange with field values capping at max pocket", () => {
     const mockOnTransferFunds = jest.fn();
     const converterWrapper = mount(
-      <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+      <Router>
+        <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+      </Router>
     );
     const submitButton = converterWrapper.find(".conversion-form__exchange");
     const fromValue = converterWrapper.find(".conversion-form__from-value");
@@ -227,7 +262,9 @@ describe("Converter: component inputs/buttons", () => {
   it("Should trigger exchange with field values with to field", () => {
     const mockOnTransferFunds = jest.fn();
     const converterWrapper = mount(
-      <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+      <Router>
+        <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+      </Router>
     );
     const submitButton = converterWrapper.find(".conversion-form__exchange");
     const fromValue = converterWrapper.find(".conversion-form__from-value");
@@ -249,7 +286,9 @@ describe("Converter: component inputs/buttons", () => {
   it("Should trigger exchange with field values with to field cap", () => {
     const mockOnTransferFunds = jest.fn();
     const converterWrapper = mount(
-      <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+      <Router>
+        <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+      </Router>
     );
     const submitButton = converterWrapper.find(".conversion-form__exchange");
     const fromValue = converterWrapper.find(".conversion-form__from-value");
@@ -273,11 +312,13 @@ describe("Converter: component inputs/buttons", () => {
     const mockOnSelectToPocket = jest.fn();
     const mockOnTransferFunds = jest.fn();
     const converterWrapper = mount(
-      <ConversionForm
-        {...fullState}
-        onSelectToPocket={mockOnSelectToPocket}
-        onTransferFunds={mockOnTransferFunds}
-      />
+      <Router>
+        <ConversionForm
+          {...fullState}
+          onSelectToPocket={mockOnSelectToPocket}
+          onTransferFunds={mockOnTransferFunds}
+        />
+      </Router>
     );
     // console.log(
     //   converterWrapper.find(".conversion-form__switch-currency").debug()

@@ -8,6 +8,7 @@ import thunkMiddleware from "redux-thunk";
 import ConverterContainer from "components/Converter/ConverterContainer";
 import { Converter } from "components/Converter/Converter";
 import reducer from "reducers/reducer";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import * as service from "service/ratesService";
 
@@ -27,9 +28,11 @@ describe("Converter Container renders", () => {
     const spy = jest.spyOn(service, "getRates");
 
     ReactDOM.render(
-      <Provider store={store}>
-        <ConverterContainer />
-      </Provider>,
+      <Router>
+        <Provider store={store}>
+          <ConverterContainer />
+        </Provider>
+      </Router>,
       div
     );
     ReactDOM.unmountComponentAtNode(div);
@@ -39,9 +42,11 @@ describe("Converter Container renders", () => {
   it("Renders a Converter component", () => {
     const spy = jest.spyOn(service, "getRates");
     const container = mount(
-      <Provider store={store}>
-        <ConverterContainer />
-      </Provider>
+      <Router>
+        <Provider store={store}>
+          <ConverterContainer />
+        </Provider>
+      </Router>
     );
     expect(container.find(Converter)).toBeTruthy();
     // check that it renders one of the default pockets

@@ -67,3 +67,25 @@ export function fetchRates(currency) {
     );
   };
 }
+
+export const ADD_TO_HISTORY = "ADD_TO_HISTORY";
+export function addToHistory({
+  rate,
+  date,
+  fromPocketCode,
+  fromValue,
+  toPocketCode,
+  toValue
+} = {}) {
+  return {
+    type: ADD_TO_HISTORY,
+    historyItem: {
+      rate,
+      date,
+      fromPocketCode,
+      fromValue,
+      toPocketCode,
+      toValue
+    }
+  };
+}

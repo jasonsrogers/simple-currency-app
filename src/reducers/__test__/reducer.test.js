@@ -1,4 +1,5 @@
-import reducer from "../reducer";
+import reducer from "reducers/reducer";
+import * as actions from "actions/actions";
 
 describe("Reducers: ", () => {
   it("should return the initial state", () => {
@@ -30,12 +31,22 @@ describe("Reducers: ", () => {
         selectedRateInfo: {}
       },
       selectedToPocket: {},
-      selectedToPocketCurrency: "USD"
+      selectedToPocketCurrency: "USD",
+      history: [
+        {
+          fromPocketCode: "EUR",
+          fromValue: 12,
+          toPocketCode: "GBP",
+          toValue: 10,
+          rate: 1.2,
+          date: "Sun Nov 17 2019 23:55:38 GMT+0000 (Greenwich Mean Time)"
+        }
+      ]
     });
   });
   it("should Set EUR as the from currency pocket and leave USD as from", () => {
     let res = reducer(undefined, {
-      type: "SELECT_FROM_POCKET",
+      type: actions.SELECT_FROM_POCKET,
       code: "EUR"
     });
     expect(res.selectedFromPocketCurrency).toEqual("EUR");
@@ -43,7 +54,7 @@ describe("Reducers: ", () => {
   });
   it("should Set USD as the from currency pocket and set from to ''", () => {
     let res = reducer(undefined, {
-      type: "SELECT_FROM_POCKET",
+      type: actions.SELECT_FROM_POCKET,
       code: "USD"
     });
     expect(res.selectedFromPocketCurrency).toEqual("USD");
@@ -51,7 +62,7 @@ describe("Reducers: ", () => {
   });
   it("should Set EUR as the to currency pocket and leave from", () => {
     let res = reducer(undefined, {
-      type: "SELECT_TO_POCKET",
+      type: actions.SELECT_TO_POCKET,
       code: "EUR"
     });
     expect(res.selectedFromPocketCurrency).toEqual("GBP");
@@ -59,7 +70,7 @@ describe("Reducers: ", () => {
   });
   it("should signal that it's loading new rate info, but keep the existing ones", () => {
     let res = reducer(undefined, {
-      type: "REQUEST_RATES",
+      type: actions.REQUEST_RATES,
       currency: "EUR"
     });
     const selectedPocketRates = {
@@ -72,7 +83,7 @@ describe("Reducers: ", () => {
   });
   it("should update state with new rates", () => {
     let res = reducer(undefined, {
-      type: "RECEIVE_RATES",
+      type: actions.RECEIVE_RATES,
       selectedRateInfo: { a: 1 }
     });
     const selectedPocketRates = {
@@ -87,7 +98,7 @@ describe("Reducers: ", () => {
     const fromPocketCode = "EUR";
     const toPocketCode = "GBP";
     let res = reducer(undefined, {
-      type: "TRANSFER_FUNDS",
+      type: actions.TRANSFER_FUNDS,
       fromPocketCode,
       fromValue: 15,
       toPocketCode,
@@ -114,7 +125,7 @@ describe("Reducers: ", () => {
     const fromPocketCode = "EUR";
     const toPocketCode = "GBP";
     let res = reducer(undefined, {
-      type: "TRANSFER_FUNDS",
+      type: actions.TRANSFER_FUNDS,
       fromPocketCode,
       fromValue: 15.15,
       toPocketCode,
@@ -136,5 +147,45 @@ describe("Reducers: ", () => {
 
     expect(res.pockets[fromPocketCode]).toEqual(resFromPocket);
     expect(res.pockets[toPocketCode]).toEqual(resToPocket);
+  });
+
+  it("should add to the history", () => {
+    const fromPocketCode = "EUR";
+    const fromValue = 100;
+    const toPocketCode = "EUR";
+    const toValue = 50;
+    const date = "Sun Nov 17 2019 23:55:38 GMT+0000 (Greenwich Mean Time)";
+    const rate = 0.5;
+
+    const historyItem = {
+      rate,
+      date,
+      fromPocketCode,
+      fromValue,
+      toPocketCode,
+      toValue
+    };
+
+    let res = reducer(
+      {
+        history: [
+          {
+            fromPocketCode: "EUR",
+            fromValue: 12,
+            toPocketCode: "GBP",
+            toValue: 10,
+            rate: 1.2,
+            date: "Sun Nov 17 2019 23:55:38 GMT+0000 (Greenwich Mean Time)"
+          }
+        ]
+      },
+      {
+        type: actions.ADD_TO_HISTORY,
+        historyItem
+      }
+    );
+    expect(res.history.length).toBe(2);
+    // gets pushed to the front of history
+    expect(res.history[0]).toEqual(historyItem);
   });
 });

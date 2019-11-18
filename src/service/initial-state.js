@@ -33,7 +33,17 @@ export const getInitialState = () => {
         symbol: "$",
         description: "American Dollar"
       }
-    }
+    },
+    history: [
+      {
+        fromPocketCode: "EUR",
+        fromValue: 12,
+        toPocketCode: "GBP",
+        toValue: 10,
+        rate: 1.2,
+        date: 'Sun Nov 17 2019 23:55:38 GMT+0000 (Greenwich Mean Time)'
+      }
+    ]
   };
 };
 

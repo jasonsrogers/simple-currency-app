@@ -9,11 +9,12 @@ import {
   RECEIVE_RATES,
   TRANSFER_FUNDS,
   SELECT_FROM_POCKET,
-  SELECT_TO_POCKET
+  SELECT_TO_POCKET,
+  ADD_TO_HISTORY
 } from "actions/actions";
 export default (state = { ...getInitialState() }, action) => {
   switch (action.type) {
-    case SELECT_FROM_POCKET:
+    case SELECT_FROM_POCKET: {
       return {
         ...state,
         selectedFromPocketCurrency: action.code,
@@ -22,13 +23,14 @@ export default (state = { ...getInitialState() }, action) => {
             ? ""
             : state.selectedToPocketCurrency
       };
-    case SELECT_TO_POCKET:
+    }
+    case SELECT_TO_POCKET: {
       return {
         ...state,
         selectedToPocketCurrency: action.code
       };
-
-    case REQUEST_RATES:
+    }
+    case REQUEST_RATES: {
       let selectedPocketRates = {
         // keept the previous rates until next ones loaded to avoid blink
         ...state.selectedPocketRates,
@@ -39,8 +41,8 @@ export default (state = { ...getInitialState() }, action) => {
         selectedPocketCurrency: action.currency,
         selectedPocketRates
       };
-
-    case RECEIVE_RATES:
+    }
+    case RECEIVE_RATES: {
       return {
         ...state,
         // selectedPocketCurrency: action.currency,
@@ -53,7 +55,8 @@ export default (state = { ...getInitialState() }, action) => {
           selectedRateInfo: action.selectedRateInfo
         }
       };
-    case TRANSFER_FUNDS:
+    }
+    case TRANSFER_FUNDS: {
       const { fromPocketCode, fromValue, toPocketCode, toValue } = action;
 
       let pockets = { ...state.pockets };
@@ -72,6 +75,13 @@ export default (state = { ...getInitialState() }, action) => {
         ...state,
         pockets
       };
+    }
+    case ADD_TO_HISTORY: {
+      return {
+        ...state,
+        history: [action.historyItem, ...state.history]
+      };
+    }
     default:
       return state;
   }

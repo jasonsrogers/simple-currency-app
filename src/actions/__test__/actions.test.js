@@ -79,8 +79,7 @@ describe("Actions: Rates", () => {
     // const mockJsonPromise = Promise.resolve(mockSuccessResponse); // 2
     const mockFetchPromise = Promise.resolve({
       // 3
-    //   json: () => mockJsonPromise
-    
+      //   json: () => mockJsonPromise
     });
     const mockFn = jest
       .spyOn(service, "getRates")
@@ -91,5 +90,37 @@ describe("Actions: Rates", () => {
     expect(dispatch).toBeCalledWith(expectedAction);
     expect(mockFn).toBeCalledWith("EUR");
     expect(dispatch).toBeCalledWith(expectedAction2);
+  });
+});
+
+describe("Actions: History", () => {
+  it("Should fire actions add to history", () => {
+    const fromPocketCode = "EUR";
+    const fromValue = 100;
+    const toPocketCode = "EUR";
+    const toValue = 50;
+    const date = "Sun Nov 17 2019 23:55:38 GMT+0000 (Greenwich Mean Time)";
+    const rate = 0.5;
+    const action = {
+      type: actions.ADD_TO_HISTORY,
+      rate,
+      date,
+      fromPocketCode,
+      fromValue,
+      toPocketCode,
+      toValue
+    };
+    const expectedAction = {
+      type: actions.ADD_TO_HISTORY,
+      historyItem: {
+        rate,
+        date,
+        fromPocketCode,
+        fromValue,
+        toPocketCode,
+        toValue
+      }
+    };
+    expect(actions.addToHistory(action)).toEqual(expectedAction);
   });
 });

@@ -2,13 +2,12 @@ import React from "react";
 import { useInput } from "hooks/input-hook";
 import { roundValue } from "service/ratesService";
 import Button from "react-bootstrap/Button";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // TODO: make exchange navigate back to pockets page
 
 export function ConversionForm(props) {
-  //
-  // const history = useHistory();
+  const history = useHistory();
 
   const {
     selectedPocketRates,
@@ -83,6 +82,7 @@ export function ConversionForm(props) {
   };
   // handle the actual transfer
   const handleSubmit = evt => {
+    debugger;
     evt.preventDefault();
 
     onTransferFunds({
@@ -92,8 +92,8 @@ export function ConversionForm(props) {
       toValue
     });
     resetFields();
-    // TODO: causes problem with jest, disabled for now
-    // history.push("/pocket");
+
+    history.push("/pocket");
   };
 
   if (rates) {
