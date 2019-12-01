@@ -34,7 +34,7 @@ export function Pocket(props) {
         {isPocketSelected && (
           <div className="pocket__nav">
             <Button disabled>Top Up</Button>
-            <Link to="/exchange">Exchange</Link>
+            <Link className="pocket__exchange" to="/exchange">Exchange</Link>
             <Button disabled>Bank</Button>
           </div>
         )}

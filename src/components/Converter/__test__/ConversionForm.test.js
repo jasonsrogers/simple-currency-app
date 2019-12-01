@@ -207,6 +207,7 @@ describe("Converter: component inputs/buttons", () => {
       toPocketCode: "USD",
       toValue: ""
     });
+    // TODO: capture history call
   });
 
   it("Should trigger exchange with field values", () => {

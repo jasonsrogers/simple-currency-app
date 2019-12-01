@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Pocket } from "components/PocketList/Pocket";
-import { JestEnvironment } from "@jest/environment";
+import { BrowserRouter as Router } from "react-router-dom";
 
 describe("Pocket renders", () => {
   it("Sanity check", () => {
@@ -12,7 +12,7 @@ describe("Pocket renders", () => {
     ReactDOM.render(<Pocket state={state} />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
-  it("Renders a pocket info", () => {
+  it("Renders a not selected pocket info", () => {
     const mockOnSelectPocket = jest.fn();
     const state = {
       pocket: {
@@ -25,8 +25,38 @@ describe("Pocket renders", () => {
       isPocketSelected: false
     };
 
-    const list = mount(<Pocket {...state} />);
-    expect(list.text()).toContain("£ 123.12");
-    expect(list.text()).toContain("British Pound");
+    const pocket = mount(<Pocket {...state} />);
+    expect(pocket.text()).toContain("£ 123.12");
+    expect(pocket.text()).toContain("British Pound");
+    expect(pocket.text()).toContain("Select");
+  });
+  it("Renders a selected pocket info", () => {
+    const mockOnSelectPocket = jest.fn();
+    const state = {
+      pocket: {
+        code: "GBP",
+        amount: 123.12,
+        symbol: "£",
+        description: "British Pound"
+      },
+      onSelectPocket: mockOnSelectPocket,
+      isPocketSelected: true
+    };
+
+    const pocket = mount(
+      <Router>
+        <Pocket {...state} />
+      </Router>
+    );
+    expect(pocket.text()).toContain("£ 123.12");
+    expect(pocket.text()).toContain("British Pound");
+    expect(pocket.text()).toContain("Top Up");
+    expect(pocket.text()).toContain("Exchange");
+    expect(pocket.text()).toContain("Bank");
+
+    const exchangeLink = pocket.find("Link.pocket__exchange");
+    exchangeLink.simulate("click");
+    // expect(mockOnSelectPocket).toBeCalled();
+    // expect(location.pathname).toBe("/products");
   });
 });

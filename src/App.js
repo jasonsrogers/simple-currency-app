@@ -18,6 +18,7 @@ import HeaderContainer from "components/Header/HeaderContainer";
 import PocketListContainer from "components/PocketList/PocketListContainer";
 import RatesContainer from "components/Rates/RatesContainer";
 import ConverterContainer from "components/Converter/ConverterContainer";
+import HistoryContainer from "components/History/HistoryContainer";
 
 function App() {
   return (
@@ -30,9 +31,7 @@ function App() {
             <Route path="/pocket" component={PocketListContainer}></Route>
             <Route path="/exchange" component={ConverterContainer}></Route>
             <Route path="/Rates" component={RatesContainer}></Route>
-            <Route path="/history">
-              <h1>History (Coming soon)</h1>
-            </Route>
+            <Route path="/History" component={HistoryContainer}></Route>
           </Switch>
         </div>
 

@@ -82,7 +82,6 @@ export function ConversionForm(props) {
   };
   // handle the actual transfer
   const handleSubmit = evt => {
-    debugger;
     evt.preventDefault();
 
     onTransferFunds({
