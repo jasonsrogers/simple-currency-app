@@ -13,6 +13,7 @@ export function ConversionForm(props) {
     selectedPocketRates,
     onTransferFunds,
     onSelectToPocket,
+    onAddToHistory,
     pockets,
     selectedFromPocketCurrency,
     selectedToPocketCurrency
@@ -90,6 +91,15 @@ export function ConversionForm(props) {
       toPocketCode: toPocket.code,
       toValue
     });
+    // Note: this wouldn't really happen with a proper BE, history items would be added in BE and read from there
+    onAddToHistory({
+      rate,
+      date: new Date().toString(),
+      fromPocketCode: fromPocket.code,
+      fromValue,
+      toPocketCode: toPocket.code,
+      toValue
+    });
     resetFields();
 
     history.push("/pocket");
@@ -140,7 +150,6 @@ export function ConversionForm(props) {
               disabled={!isEnabled}
             />
             {listUnSelectedPockets.map(([key, value]) => (
-              // TODO: why is replacing this by Button failing my tests but counting the button twice?
               <Button
                 key={value.code}
                 className={

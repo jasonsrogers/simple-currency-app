@@ -40,6 +40,14 @@ describe("Reducers: ", () => {
           toValue: 10,
           rate: 1.2,
           date: "Sun Nov 17 2019 23:55:38 GMT+0000 (Greenwich Mean Time)"
+        },
+        {
+          fromPocketCode: "EUR",
+          fromValue: 24,
+          toPocketCode: "USD",
+          toValue: 20,
+          rate: 1.2,
+          date: "Sun Nov 18 2019 23:55:38 GMT+0000 (Greenwich Mean Time)"
         }
       ]
     });

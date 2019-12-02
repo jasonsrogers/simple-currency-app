@@ -192,10 +192,14 @@ describe("Converter: component inputs/buttons", () => {
 
   it("Should trigger select exchange callback", () => {
     const mockOnTransferFunds = jest.fn();
-
+    const mockAddToHistory = jest.fn();
     const converterWrapper = mount(
       <Router>
-        <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+        <ConversionForm
+          {...fullState}
+          onTransferFunds={mockOnTransferFunds}
+          onAddToHistory={mockAddToHistory}
+        />
       </Router>
     );
     const button = converterWrapper.find(".conversion-form__exchange");
@@ -212,9 +216,14 @@ describe("Converter: component inputs/buttons", () => {
 
   it("Should trigger exchange with field values", () => {
     const mockOnTransferFunds = jest.fn();
+    const mockAddToHistory = jest.fn();
     const converterWrapper = mount(
       <Router>
-        <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+        <ConversionForm
+          {...fullState}
+          onTransferFunds={mockOnTransferFunds}
+          onAddToHistory={mockAddToHistory}
+        />
       </Router>
     );
     const submitButton = converterWrapper.find(".conversion-form__exchange");
@@ -233,13 +242,19 @@ describe("Converter: component inputs/buttons", () => {
       toPocketCode: "USD",
       toValue: 15
     });
+    expect(mockAddToHistory).toBeCalled();
   });
 
   it("Should trigger exchange with field values capping at max pocket", () => {
     const mockOnTransferFunds = jest.fn();
+    const mockAddToHistory = jest.fn();
     const converterWrapper = mount(
       <Router>
-        <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+        <ConversionForm
+          {...fullState}
+          onTransferFunds={mockOnTransferFunds}
+          onAddToHistory={mockAddToHistory}
+        />
       </Router>
     );
     const submitButton = converterWrapper.find(".conversion-form__exchange");
@@ -262,9 +277,14 @@ describe("Converter: component inputs/buttons", () => {
 
   it("Should trigger exchange with field values with to field", () => {
     const mockOnTransferFunds = jest.fn();
+    const mockAddToHistory = jest.fn();
     const converterWrapper = mount(
       <Router>
-        <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+        <ConversionForm
+          {...fullState}
+          onTransferFunds={mockOnTransferFunds}
+          onAddToHistory={mockAddToHistory}
+        />
       </Router>
     );
     const submitButton = converterWrapper.find(".conversion-form__exchange");
@@ -286,9 +306,14 @@ describe("Converter: component inputs/buttons", () => {
   });
   it("Should trigger exchange with field values with to field cap", () => {
     const mockOnTransferFunds = jest.fn();
+    const mockAddToHistory = jest.fn();
     const converterWrapper = mount(
       <Router>
-        <ConversionForm {...fullState} onTransferFunds={mockOnTransferFunds} />
+        <ConversionForm
+          {...fullState}
+          onTransferFunds={mockOnTransferFunds}
+          onAddToHistory={mockAddToHistory}
+        />
       </Router>
     );
     const submitButton = converterWrapper.find(".conversion-form__exchange");
@@ -312,12 +337,14 @@ describe("Converter: component inputs/buttons", () => {
   it("Should blank fields when changing currency", () => {
     const mockOnSelectToPocket = jest.fn();
     const mockOnTransferFunds = jest.fn();
+    const mockAddToHistory = jest.fn();
     const converterWrapper = mount(
       <Router>
         <ConversionForm
           {...fullState}
           onSelectToPocket={mockOnSelectToPocket}
           onTransferFunds={mockOnTransferFunds}
+          onAddToHistory={mockAddToHistory}
         />
       </Router>
     );

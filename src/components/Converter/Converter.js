@@ -10,7 +10,8 @@ function Converter(props) {
       pockets
     },
     onTransferFunds,
-    onSelectToPocket
+    onSelectToPocket,
+    onAddToHistory
   } = props;
   return (
     <div>
@@ -23,6 +24,7 @@ function Converter(props) {
         selectedToPocketCurrency={selectedToPocketCurrency}
         onTransferFunds={onTransferFunds}
         onSelectToPocket={onSelectToPocket}
+        onAddToHistory={onAddToHistory}
       />
     </div>
   );

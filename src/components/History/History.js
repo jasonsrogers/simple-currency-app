@@ -10,7 +10,7 @@ function HistoryRow(props) {
     date
   } = props.transaction;
   return (
-    <div>
+    <div className="history__history-row">
       {fromPocketCode} {fromValue} to {toPocketCode} {toValue} at rate {rate} on{" "}
       {date}
     </div>

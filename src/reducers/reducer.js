@@ -32,7 +32,7 @@ export default (state = { ...getInitialState() }, action) => {
     }
     case REQUEST_RATES: {
       let selectedPocketRates = {
-        // keept the previous rates until next ones loaded to avoid blink
+        // keep the previous rates until next ones loaded to avoid blink
         ...state.selectedPocketRates,
         ...{ isLoading: true, error: undefined }
       };
